@@ -1,9 +1,9 @@
-import Features from "@/components/sections/Features";
+import Features from "@/components/landing/Features";
 import Navbar from "../components/layout/Navbar";
-import Hero from "../components/sections/Hero";
-import HowItWorks from "@/components/sections/HowItWorks";
-import Testimonials from "@/components/sections/Testimonials";
-import CTA from "@/components/sections/CTA";
+import Hero from "../components/landing/Hero";
+import HowItWorks from "@/components/landing/HowItWorks";
+import Testimonials from "@/components/landing/Testimonials";
+import CTA from "@/components/landing/CTA";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
