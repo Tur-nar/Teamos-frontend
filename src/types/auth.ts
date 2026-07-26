@@ -1,5 +1,6 @@
 export type SignUpEmailValues = {
+    name: string;
     email: string;
     password: string;
-    name: string;
+    confirmPassword: string;
 }

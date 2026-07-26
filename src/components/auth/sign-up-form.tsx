@@ -42,7 +42,7 @@ export default function SignUpForm() {
     
     return (
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-             <FieldSet className="w-full max-w-xs">
+             <FieldSet className="w-full max-w-md">
                 <FieldGroup>
                     <Field>
                         <FieldLabel htmlFor="name">Name</FieldLabel>
