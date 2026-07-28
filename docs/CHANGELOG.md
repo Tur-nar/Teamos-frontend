@@ -538,3 +538,12 @@ When making significant changes:
 5. Keep entries chronological.
 
 The changelog should help future developers understand the evolution of TM-Management without reading the entire Git history.
+
+### Added
+
+- Authentication service layer
+- Better Auth service abstraction
+- Global AuthProvider
+- useAuth custom hook
+- Session initialization
+- Session refresh support
