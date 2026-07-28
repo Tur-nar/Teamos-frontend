@@ -22,7 +22,7 @@ export default function Features() {
 
       <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, id) => (
-          <Reveal key={feature.title} delay={id * 70}>
+          <Reveal key={feature.title} delay={id * 250}>
             <Card className="group h-full border-border/70 bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_20px_50px_rgba(34,211,238,0.12)]">
               <CardHeader className="h-full p-6">
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-105">

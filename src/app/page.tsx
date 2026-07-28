@@ -5,17 +5,20 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import CTA from "@/components/landing/CTA";
 import Footer from "@/components/layout/Footer";
+import PageTransition from "@/components/ui/PageTransition";
 
 export default function Home() {
-    return (
-        <main>
-            <Navbar />
-            <Hero />
-            <Features />
-            <HowItWorks />
-            <Testimonials />
-            <CTA />
-            <Footer />
-        </main>
-    );
+  return (
+    <PageTransition>
+      <main>
+        <Navbar />
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Testimonials />
+        <CTA />
+        <Footer />
+      </main>
+    </PageTransition>
+  );
 }

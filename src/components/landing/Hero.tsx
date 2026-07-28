@@ -60,7 +60,7 @@ export default function Hero() {
           </div>
         </Reveal>
 
-        <Reveal className="relative mx-auto w-full max-w-xl" delay={120}>
+        <Reveal className="relative mx-auto w-full max-w-xl" delay={180}>
           <div className="absolute left-1/2 top-6 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/30 blur-[120px]" />
           <div className="animate-float rounded-[2rem] border border-border/80 bg-card/80 p-4 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:p-6">
             <div className="rounded-[1.5rem] border border-border/70 bg-background/70 p-5 sm:p-6">

@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useMemo } from "react";
+import { fadeInVariants } from "@/animations/fade";
 
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  duration?: number;
+  distance?: number;
   once?: boolean;
 };
 
@@ -13,45 +17,23 @@ export default function Reveal({
   children,
   className = "",
   delay = 0,
+  duration = 0.45,
+  distance = 24,
   once = true,
 }: RevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-
-    if (!node) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-
-          if (once) {
-            observer.unobserve(node);
-          }
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, [once]);
+  const shouldReduceMotion = useReducedMotion();
+  const variants = useMemo(() => fadeInVariants(distance, duration), [distance, duration]);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-700 ease-out ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-      } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <motion.div
+      initial={shouldReduceMotion ? "visible" : "hidden"}
+      whileInView={shouldReduceMotion ? undefined : "visible"}
+      viewport={{ once, amount: 0.2 }}
+      variants={variants}
+      transition={{ delay, duration, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
