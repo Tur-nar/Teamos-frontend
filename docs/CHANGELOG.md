@@ -547,3 +547,11 @@ The changelog should help future developers understand the evolution of TM-Manag
 - useAuth custom hook
 - Session initialization
 - Session refresh support
+
+## AUTH-002.5 — Better Auth Access Control
+
+- Added frontend access-control configuration.
+- Mirrored backend RBAC permission model.
+- Configured organizationClient({ ac, roles }).
+- Added support for supervisor role inference.
+- Frontend Better Auth SDK now matches backend authorization model.
