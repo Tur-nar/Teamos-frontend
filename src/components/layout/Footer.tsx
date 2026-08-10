@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="text-center md:text-left">
           <h3 className="mb-2 text-lg font-bold text-foreground">Quick Links</h3>
           <div className="flex flex-col items-center space-y-2 md:items-start">
-            <motion.a whileHover={{ x: 2, color: "var(--primary)" }} href="#" className="text-muted-foreground transition-colors duration-300">Home</motion.a>
+            <motion.a whileHover={{ x: 2, color: "var(--primary)" }} href="/" className="text-muted-foreground transition-colors duration-300">Home</motion.a>
             <motion.a whileHover={{ x: 2, color: "var(--primary)" }} href="#" className="text-muted-foreground transition-colors duration-300">Features</motion.a>
             <motion.a whileHover={{ x: 2, color: "var(--primary)" }} href="#" className="text-muted-foreground transition-colors duration-300">How It Works</motion.a>
             <motion.a whileHover={{ x: 2, color: "var(--primary)" }} href="#" className="text-muted-foreground transition-colors duration-300">Reviews</motion.a>

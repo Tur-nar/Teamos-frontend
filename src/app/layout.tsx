@@ -1,47 +1,40 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
-import QueryProvider from "@/providers/query-provider";
-import { ThemeProvider } from "@/providers/theme-provider";
+import Providers from "./providers";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "TM-Management",
-  description: "Build to help analyse your Task",
+    title: "TM-Management",
+    description: "Build to help analyse your Task",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning  
-    >
-      <body className="min-h-full flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    return (
+        <html
+            lang="en"
+            className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+            suppressHydrationWarning
         >
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+            <body className="min-h-full flex flex-col">
+                <Providers>
+                    {children}
+                </Providers>
+            </body>
+        </html>
+    );
 }

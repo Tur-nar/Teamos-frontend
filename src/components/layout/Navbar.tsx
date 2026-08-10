@@ -13,6 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ROUTES } from "@/constants/routes";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
@@ -81,16 +82,14 @@ export default function Navbar() {
                 <Menu className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              {NAV_LINKS.map((link) => (
-                <DropdownMenuItem key={link.href} asChild>
-                  <Link href={link.href} className="w-full">
-                    {link.label}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
+            <DropdownMenuContent align="end" className="w-48">            
               <DropdownMenuItem asChild>
-                <Link href="/sign-up" className="w-full">
+                <Link href={ROUTES.auth.signIn} className="w-full">
+                  Sign-In
+                 </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href={ROUTES.auth.signUp} className="w-full">
                   Get Started
                 </Link>
               </DropdownMenuItem>

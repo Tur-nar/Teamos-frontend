@@ -1,22 +1,37 @@
 "use client";
 
 import React from "react";
-import QueryProvider from "@/providers/query-provider";
+
 import { ThemeProvider } from "@/providers/theme-provider";
+import QueryProvider from "@/providers/query-provider";
 import { AuthProvider } from "@/providers/auth-provider";
+
+import { Toaster } from "sonner";
 
 type ProvidersProps = {
     children: React.ReactNode;
 };
 
-export function Providers({ children }: ProvidersProps) {
+export default function Providers({
+    children,
+}: ProvidersProps) {
     return (
-        <QueryProvider>
-            <ThemeProvider>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+        >
+            <QueryProvider>
                 <AuthProvider>
                     {children}
+
+                    <Toaster
+                        position="top-right"
+                        richColors
+                    />
                 </AuthProvider>
-            </ThemeProvider>
-        </QueryProvider>
+            </QueryProvider>
+        </ThemeProvider>
     );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useCallback, useEffect, useState } from "react";
+import { getSession } from "@/services/auth/auth.service";
 import { authClient } from "@/lib/auth/auth-client";
 
 type SessionData = typeof authClient.$Infer.Session;
@@ -26,7 +27,7 @@ type AuthProviderProps = {
  */
 async function fetchSessionData(): Promise<{ session: Session | null; user: User | null }> {
     try {
-        const { data } = await authClient.getSession();
+        const { data } = await getSession();
         if (data) {
             return { session: data.session, user: data.user };
         }

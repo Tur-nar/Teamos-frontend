@@ -14,3 +14,8 @@ export interface HowItWorks {
     title: string;
     description: string;
 }
+/**
+ * The registry. Adding a new page means adding one line here —
+ * that single line controls both what the middleware intercepts
+ * AND how it's treated. Nothing to forget in a second place.
+ */

@@ -81,6 +81,7 @@
 
   --card: #ffffff;
   --card-foreground: #09090b;
+  --card-shadow: #ffffff24;
 
   --popover: #ffffff;
   --popover-foreground: #09090b;
@@ -153,6 +154,7 @@
 
   --card: #111827;
   --card-foreground: #fafafa;
+  --card-shadow: #ffffff24;
 
   --popover: #111827;
   --popover-foreground: #fafafa;

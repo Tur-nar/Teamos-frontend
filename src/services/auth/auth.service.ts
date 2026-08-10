@@ -6,7 +6,7 @@
 //  - All auth operations pass through this file.
 //  - No React logic, JSX, routing, or toast notifications.
 //  - No Axios. No manual session management.
-//  - Better Auth responses are returned directly to the caller.
+//  - Better Auth responses are normalized here before returning to callers.
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -20,6 +20,7 @@ import {
     type SignInEmailValues,
     type SignUpEmailValues,
 } from "@/types/auth";
+import type { OrganizationSummary } from "@/types/organization";
 
 // ─── Authentication ───────────────────────────────────────────────────────────
 
@@ -66,13 +67,27 @@ export const getSession = async () => {
 
 /**
  * Creates a new organization owned by the currently authenticated user.
+ *
+ * Better Auth returns `{ data: Organization | null; error: Error | null }`.
+ * This function unwraps that response and normalizes into OrganizationSummary.
  */
-export const createOrganization = async (form: CreateOrganizationValues) => {
-    return authClient.organization.create({
+export const createOrganization = async (form: CreateOrganizationValues): Promise<OrganizationSummary> => {
+    const { data, error } = await authClient.organization.create({
         name: form.name,
         slug: form.slug,
         logo: form.logo,
     });
+
+    if (error) {
+        throw new Error(error.message ?? "Failed to create organization.");
+    }
+
+    return {
+        id: data.id,
+        name: data.name,
+        slug: data.slug,
+        logo: data.logo,
+    };
 };
 
 /**
@@ -87,9 +102,41 @@ export const setActiveOrganization = async (form: SetActiveOrganizationValues) =
 
 /**
  * Returns all organizations the currently authenticated user belongs to.
+ *
+ * Better Auth returns `{ data: Organization[] | null; error: Error | null }`.
+ * This function unwraps that response and normalizes each item into
+ * OrganizationSummary.
  */
-export const listOrganizations = async () => {
-    return authClient.organization.list();
+export const listOrganizations = async (): Promise<OrganizationSummary[]> => {
+    const { data, error } = await authClient.organization.list();
+
+    if (error) {
+        throw new Error(error.message ?? "Failed to list organizations.");
+    }
+
+    const organizations = data ?? [];
+
+    return organizations.map((organization) => ({
+        id: organization.id,
+        name: organization.name,
+        slug: organization.slug,
+        logo: organization.logo,
+    }));
+};
+
+/**
+ * Returns all invitations received by the currently authenticated user.
+ *
+ * Better Auth returns `{ data: UserInvitation[] | null; error: Error | null }`.
+ */
+export const listUserInvitations = async () => {
+    const { data, error } = await authClient.organization.listUserInvitations();
+
+    if (error) {
+        throw new Error(error.message ?? "Failed to list invitations.");
+    }
+
+    return data ?? [];
 };
 
 /**
@@ -106,9 +153,18 @@ export const inviteMember = async (form: InviteMemberValues) => {
 /**
  * Accepts a pending invitation by its ID.
  * The authenticated user must be the recipient of the invitation.
+ *
+ * Better Auth returns `{ data: Invitation | null; error: Error | null }`.
+ * This function unwraps that response and returns the data.
  */
 export const acceptInvitation = async (form: AcceptInvitationValues) => {
-    return authClient.organization.acceptInvitation({
+    const { data, error } = await authClient.organization.acceptInvitation({
         invitationId: form.invitationId,
     });
+
+    if (error) {
+        throw new Error(error.message ?? "Failed to accept invitation.");
+    }
+
+    return data;
 };
