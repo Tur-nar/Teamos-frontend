@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { signInUser } from "@/services/auth/auth.service";
+
+import { SignInApi } from "@/lib/api/auth.api";
 import type { SignInEmailValues } from "@/types/auth";
 
-export function useSignIn() {
+export const useSignIn = () => {
     return useMutation({
-        mutationFn: (form: SignInEmailValues) => signInUser(form),
+        mutationFn: (form: SignInEmailValues) => SignInApi(form),
     });
-}
+};

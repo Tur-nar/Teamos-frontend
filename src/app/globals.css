@@ -6,8 +6,8 @@
 
 @theme inline {
   /* Fonts */
-  --font-heading: var(--font-sans);
-  --font-sans: var(--font-sans);
+  --font-heading: var(--font-poppins);
+  --font-sans: var(--font-poppins);
 
   /* Layout */
   --color-background: var(--background);

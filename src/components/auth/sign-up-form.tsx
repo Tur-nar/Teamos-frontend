@@ -50,7 +50,7 @@ export default function SignUpForm() {
             }
 
             toast.success("Account created successfully.");
-            router.push(ROUTES.dashboard);
+            router.push(ROUTES.onboarding);
         } catch (error) {
             console.error("Sign up failed:", error);
             toast.error("Unable to create account.");
