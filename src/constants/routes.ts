@@ -11,7 +11,6 @@ export const ROUTES = {
 type Access = "public" | "protected" | "auth-only";
 
 interface RouteEntry {
-  /** Exact pathname or a prefix (see matchesPrefix). */
   path: string;
   matchesPrefix?: boolean;
   access: Access;

@@ -6,7 +6,6 @@ const LETTERS = ["T", "e", "a", "m", "O", "s"];
 
 export default function SessionLoader() {
     const [mounted, setMounted] = useState(false);
-
     useEffect(() => {
         const frame = requestAnimationFrame(() => setMounted(true));
         return () => cancelAnimationFrame(frame);

@@ -1,9 +1,7 @@
 "use client";
-
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-import { authClient } from "@/lib/auth/auth-client";
+import { authClient, asSessionUser } from "@/lib/auth/auth-client";
 import { ROUTES } from "@/constants/routes";
 import { useListOrganizations } from "@/hooks/organization/use-list-organizations";
 import SessionLoader from "@/components/shared/session-loader";
@@ -16,6 +14,7 @@ export default function DashboardLayout({
     const router = useRouter();
     const { data: session, isPending: sessionPending } = authClient.useSession();
     const hasSession = Boolean(session);
+    const user = asSessionUser(session?.user);
 
     const {
         data: organizations,
@@ -23,25 +22,22 @@ export default function DashboardLayout({
         isSuccess: orgsLoaded,
     } = useListOrganizations(hasSession);
 
-    useEffect(() => {
-        if (!sessionPending && !session) {
-            router.replace(ROUTES.auth.signIn);
-            return;
-        }
+    const isReady = !sessionPending && !orgsLoading;
+    const needsSignIn = isReady && !session;
+    const needsOnboarding = isReady && hasSession && orgsLoaded && (
+        (organizations && organizations.length === 0) || user?.onboarded === false
+    );
 
-        if (hasSession && orgsLoaded && organizations && organizations.length === 0) {
+    useEffect(() => {
+        if (needsSignIn) {
+            router.replace(ROUTES.auth.signIn);
+        } else if (needsOnboarding) {
             router.replace(ROUTES.onboarding);
         }
-    }, [sessionPending, session, hasSession, orgsLoaded, organizations, router]);
+    }, [needsSignIn, needsOnboarding, router]);
 
-    if (sessionPending || !session || orgsLoading) {
-        return (
-            <SessionLoader />
-        );
-    }
-
-    if (organizations && organizations.length === 0) {
-        return null;
+    if (!isReady || needsSignIn || needsOnboarding) {
+        return <SessionLoader />;
     }
 
     return <>{children}</>;

@@ -13,3 +13,10 @@ export const authClient = createAuthClient({
 });
 
 export type Session = typeof authClient.$Infer.Session;
+export type SessionUser = Session["user"] & {
+    onboarded: boolean;
+};
+export function asSessionUser(user: Session["user"] | null | undefined): SessionUser | null {
+    if (!user) return null;
+    return user as SessionUser;
+}
