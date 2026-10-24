@@ -1,6 +1,5 @@
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
-
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
@@ -8,9 +7,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 AI coding agent conventions for this codebase. Assume competence, skip basics, follow these without re-asking.
 
 ## 1. Project Context
-- **Project:** Task Management system — multi-collaborative coding system
-<!-- - **Package manager:** npm · **Node:** v26.4.0 · **Next.js:** v16.2.10 -->
-- **Deploy target:** Vercel
+- **Project:** TM-Management
+- **Package manager:** npm · **Node:** v26.4.0 · **Next.js:** v16.2.10
 
 ## 2. Stack
 Next.js (App Router only) · TypeScript strict · shadcn/ui · Tailwind · TanStack Query v5 · Lucide React · Framer Motion / GSAP (§8) · React Hook Form + Zod.
